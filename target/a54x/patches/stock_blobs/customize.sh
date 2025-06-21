@@ -22,31 +22,17 @@ ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib64/libhwui.so" 0 0 644 "u
 
 echo "Add stock system features"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.cover.flip.xml"
-DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.pocketmode_level33.xml"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.sensorhub_level29.xml"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.wirelesscharger_authentication.xml"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/etc/permissions/com.sec.feature.pocketsensitivitymode_level4.xml" 0 0 644 "u:object_r:system_file:s0"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/etc/permissions/com.sec.feature.sensorhub_level100.xml" 0 0 644 "u:object_r:system_file:s0"
 
 echo "Fix NFC"
-BLOBS_LIST="
-system/lib64/libnfc_sec_jni.so
-system/lib64/libnfc-nci_flags.so
-system/lib64/libnfc-sec.so
-system/lib64/libstatslog_nfc.so
-system/priv-app/NfcNci
-"
-for blob in $BLOBS_LIST
-do
-DELETE_FROM_WORK_DIR "system" "$blob"
-done
-
-BLOBS_LIST="
-system/lib64/libnfc_nxpsn_jni.so
-system/lib64/vendor.samsung.hardware.nfc@2.0.so
-system/priv-app/NfcNci
-"
-for blob in $BLOBS_LIST
-do
-ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "$blob" 0 0 644 "u:object_r:system_lib_file:s0"
-done
+DELETE_FROM_WORK_DIR "system" "system/lib64/libnfc_sec_jni.so"
+DELETE_FROM_WORK_DIR "system" "system/lib64/libnfc-nci_flags.so"
+DELETE_FROM_WORK_DIR "system" "system/lib64/libnfc-sec.so"
+DELETE_FROM_WORK_DIR "system" "system/lib64/libstatslog_nfc.so"
+DELETE_FROM_WORK_DIR "system" "system/priv-app/NfcNci"
+ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib64/libnfc_nxpsn_jni.so" 0 0 644 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib64/vendor.samsung.hardware.nfc@2.0.so" 0 0 644 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/priv-app/NfcNci" 0 0 755 "u:object_r:system_file:s0"
