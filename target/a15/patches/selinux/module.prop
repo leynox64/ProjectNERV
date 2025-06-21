@@ -1,4 +1,0 @@
-id=selinux
-name=SELinux fix
-author=leynox64
-description=Force Permissive SELinux Mode
