@@ -6,10 +6,8 @@ SET_PROP "vendor" "renderthread.skia.reduceopstasksplitting" "true"
 SET_PROP "vendor" "debug.hwui.skia_atrace_enabled" "false"
 
 echo "Fix up /system/build.prop"
-SET_PROP "system" "ro.netflix.bsp_rev" --delete
-sed -i \
-    "/ro.netflix.bsp_rev=EXYNOS1380-36589-1/i persist.audio.deepbuffer_delay=33" \
-    "$WORK_DIR/system/system/build.prop"
+SET_PROP "system" "ro.netflix.bsp_rev" "EXYNOS1380-36589-1"
+SET_PROP "system" "persist.audio.deepbuffer_delay=33" "33"
 
 echo "Setting FUSE passthough"
 SET_PROP "vendor" "persist.sys.fuse.passthrough.enable" "true"
