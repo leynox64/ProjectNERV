@@ -1,0 +1,16 @@
+echo "Add stock audio policy"
+ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/etc/stage_policy.conf" 0 0 644 "u:object_r:system_file:s0"
+
+echo "Delete Hotword"
+DELETE_FROM_WORK_DIR "product" "priv-app/HotwordEnrollmentOKGoogleEx4CORTEXM55"
+DELETE_FROM_WORK_DIR "product" "priv-app/HotwordEnrollmentXGoogleEx4CORTEXM55"
+
+echo "Fix NFC"
+DELETE_FROM_WORK_DIR "system" "system/lib64/libnfc_sec_jni.so"
+DELETE_FROM_WORK_DIR "system" "system/lib64/libnfc-nci_flags.so"
+DELETE_FROM_WORK_DIR "system" "system/lib64/libnfc-sec.so"
+DELETE_FROM_WORK_DIR "system" "system/lib64/libstatslog_nfc.so"
+DELETE_FROM_WORK_DIR "system" "system/priv-app/NfcNci"
+ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib64/libnfc_nxpsn_jni.so" 0 0 644 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib64/vendor.samsung.hardware.nfc@2.0.so" 0 0 644 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/priv-app/NfcNci" 0 0 755 "u:object_r:system_file:s0"
